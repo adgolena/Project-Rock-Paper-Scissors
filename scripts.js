@@ -24,21 +24,34 @@ function getPlayerChoice(){
 
 
 
-function playRound(pSelection, cSelection){
-    
+function playRound(pSelection){
+    let result = '';
+    //console.log("player selection is: " + pSelection.id.);
+    const cSelection = getComputerChoice();
     if((pSelection=='Paper'&& cSelection=='Rock')
     ||(pSelection=='Rock'&& cSelection=='Scissor')
     ||(pSelection=='Scissor'&& cSelection=='Paper')){
-        console.log("Player Wins");
+        result = "Player Wins";
         playerPoints++;
+        
     }
     else if(pSelection==cSelection){
-        console.log("Draw")
+        result = "Draw";
     }
     else{
-        console.log("Computer Wins")
+        result = "Computer Wins";
         computerPoints++;
     }
+    /*
+    const container = document.querySelector('resultDiv');
+    const content = document.createElement('div');
+    content.textcontent = result;
+    
+    container.appendChild(content);*/
+ 
+    document.getElementById('resultDiv').innerHTML = result;
+    gamePlayed++;
+    game();
     return;
    
 }
@@ -48,17 +61,64 @@ function playRound(pSelection, cSelection){
 
 function game(){
 
-    for(let i=0; i<5;i++)
-    {
-        const playerSelection = getPlayerChoice();
-        const computerSelection = getComputerChoice();
-        playRound(playerSelection,computerSelection);
-        gamePlayed++;
+   
+    //console.log('Number of Games Played:'+ gamePlayed);
+   if(gamePlayed<5){
+        document.getElementById('score').innerHTML = 'Player:'+playerPoints+ '    '+'Computer:'+computerPoints;
+        return;
+   }else if(gamePlayed=5)
+   {
+        if(playerPoints>computerPoints){
+            document.getElementById('winner').innerHTML = 'Player Wins!';
+            document.getElementById('score').innerHTML = 'Player:'+playerPoints+ '    '+'Computer:'+computerPoints;
+        }else
+        {
+            document.getElementById('winner').innerHTML = 'Computer Wins!';
+            document.getElementById('score').innerHTML = 'Player:'+playerPoints+ '    '+'Computer:'+computerPoints;
+            disableButton();
+            //butttons.disabled = true;
+        }
         
-    }
-    console.log('Number of Games Played:'+gamePlayed);
-    console.log('Player:'+playerPoints+ '    '+'Computer:'+computerPoints);
+
+   }
+   
+}
+   
+    
+
+
+//game();
+
+
+//const rockBtn= document.querySelector('.rock');
+//rockBtn.addEventListener('click',game());
+//rockBtn.addEventListener('click',alertFunction);
+
+
+
+const butttons = document.querySelectorAll('button');
+
+butttons.forEach((button) => {
+    console.log("working")
+    button.addEventListener('click',()=>{
+        playRound(button.id)
+    });
+});
+
+function disableButton(){
+    butttons.forEach(button =>{
+        button.disabled = true;
+    });
 }
 
-game();
+function alertFunction() {
+    alert("YAY! YOU DID IT!");
+  }
+
+ // alertFunction();
+
+
+
+
+
  

@@ -1,0 +1,27 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.gameDiv{
+  
+  
+}
+
+.resultDiv{
+    height: 200px;
+    width: 200px;
+    border: solid 2px red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.playerPick{
+   
+}
+
+
